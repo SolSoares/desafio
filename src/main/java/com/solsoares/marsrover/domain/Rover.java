@@ -54,7 +54,7 @@ public class Rover {
         switch (direction) {
             case NORTH -> {
                 y++;
-                if (y > plateau.y()) throw new InvalidMoveException();
+                if (y > plateau.getY()) throw new InvalidMoveException();
             }
             case SOUTH -> {
                 y--;
@@ -62,7 +62,7 @@ public class Rover {
             }
             case EAST -> {
                 x++;
-                if (x > plateau.x())  throw new InvalidMoveException();
+                if (x > plateau.getX())  throw new InvalidMoveException();
             }
             case WEST -> {
                 x--;
