@@ -1,4 +1,4 @@
-package com.solangesas.marsrover.domain;
+package com.solsoares.marsrover.domain;
 
 public class Plateau {
 	

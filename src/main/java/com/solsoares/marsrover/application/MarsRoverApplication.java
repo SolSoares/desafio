@@ -1,8 +1,8 @@
-package com.solangesas.marsrover.application;
+package com.solsoares.marsrover.application;
 
-import com.solangesas.marsrover.domain.Coordinate;
-import com.solangesas.marsrover.domain.Plateau;
-import com.solangesas.marsrover.domain.Rover;
+import com.solsoares.marsrover.domain.Coordinate;
+import com.solsoares.marsrover.domain.Plateau;
+import com.solsoares.marsrover.domain.Rover;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package com.solangesas.marsrover.domain;
+package com.solsoares.marsrover.domain;
 
 public enum Direction {
 	N(0, "N"), S(180, "S"), W(270, "W"), E(90, "E");

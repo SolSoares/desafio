@@ -1,4 +1,4 @@
-package com.solangesas.marsrover.domain;
+package com.solsoares.marsrover.domain;
 
 import java.util.LinkedList;
 import java.util.List;

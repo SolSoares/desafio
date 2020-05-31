@@ -1,4 +1,4 @@
-package com.solangesas.marsrover.domain;
+package com.solsoares.marsrover.domain;
 
 public enum Coordinate {
 	L("L"), R("R"), M("M");
