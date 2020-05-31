@@ -20,12 +20,11 @@ public class MarsRoverApplication {
     private static LinkedList<Rover> rovers = new LinkedList();
 
     public static void main(String[] args) throws Exception  {
-
         loadInput();
 
-        for (Rover rover:rovers) {
+        for (Rover rover: rovers) {
             rover.move(plateau);
-            System.out.println(rover.getX() + " " + rover.getY() + " " + rover.getDirection());
+            System.out.println(rover.getX() + " " + rover.getY() + " " + rover.getDirectionValue());
         }
 
     }
@@ -57,15 +56,9 @@ public class MarsRoverApplication {
         String[] chars = line.split(" ");
 
         switch (chars.length) {
-            case 2:
-                plateau = new Plateau(Integer.parseInt(chars[0]), Integer.parseInt(chars[1]));
-                break;
-            case 3:
-                rovers.add(new Rover(Integer.parseInt(chars[0]), Integer.parseInt(chars[1]), chars[2]));
-                break;
-            default:
-                parseCoordinates(chars[0]);
-                break;
+            case 2 -> plateau = new Plateau(Integer.parseInt(chars[0]), Integer.parseInt(chars[1]));
+            case 3 -> rovers.add(new Rover(Integer.parseInt(chars[0]), Integer.parseInt(chars[1]), chars[2]));
+            default -> parseCoordinates(chars[0]);
         }
     }
 
@@ -77,8 +70,7 @@ public class MarsRoverApplication {
     public static void parseCoordinates(String coordinates) {
         char[] coordinateArray = coordinates.toCharArray();
 
-        for (char coordinate:coordinateArray) {
-            rovers.peekLast().getCoordinates().add(Coordinate.getCoordinateByText(String.valueOf(coordinate)));
-        }
+        for (char coordinate:coordinateArray)
+            rovers.peekLast().getCoordinates().add(Coordinate.getCoordinateByString(String.valueOf(coordinate)).orElse(null));
     }
 }

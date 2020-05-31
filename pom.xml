@@ -6,6 +6,7 @@
 
     <properties>
         <maven.compiler.release>14</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <groupId>com.solangesas</groupId>
@@ -29,9 +30,11 @@
                 <version>3.8.1</version>
                 <configuration>
                     <release>14</release>
+                    <compilerArgs>
+                        --enable-preview
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

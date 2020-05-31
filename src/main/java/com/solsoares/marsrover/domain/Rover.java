@@ -4,97 +4,71 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Rover {
-	
-	private int x;
-	private int y;
-	private Direction direction;
-	private List<Coordinate> coordinates = new LinkedList<>();
-	
-	public Rover(int axisX, int axisY, String direction) {
-		this.x = axisX;
-		this.y = axisY;
-		this.direction = Direction.getDirectionByString(direction);
-	}
 
-	public int getX() {
-		return x;
-	}
+    private int x;
+    private int y;
+    private Direction direction;
+    private List<Coordinate> coordinates = new LinkedList();
 
-	public void setX(int x) {
-		this.x = x;
-	}
+    public Rover(int axisX, int axisY, String direction) {
+        this.x = axisX;
+        this.y = axisY;
+        this.direction = Direction.getDirectionByString(direction).orElse(null);
+    }
 
-	public int getY() {
-		return y;
-	}
+    public int getX() {
+        return x;
+    }
 
-	public void setY(int y) {
-		this.y = y;
-	}
+    public int getY() {
+        return y;
+    }
 
-	public Direction getDirection() {
-		return direction;
-	}
+    public String getDirectionValue() {
+        return direction.getStringDirection();
+    }
 
-	public void setDirection(Direction direction) {
-		this.direction = direction;
-	}
+    public List<Coordinate> getCoordinates() {
+        return coordinates;
+    }
 
-	public List<Coordinate> getCoordinates() {
-		return coordinates;
-	}
+    public void move(Plateau plateau) {
+        for (Coordinate coordinate : coordinates) {
+            switch (coordinate) {
+                case LEFT -> rotateLeft();
+                case RIGHT -> rotateRight();
+                case MOVE -> moveForward(plateau);
+            }
+        }
+    }
 
-	public void setCoordinates(List<Coordinate> coordinates) {
-		this.coordinates = coordinates;
-	}
-	
-	public void move(Plateau plateau) throws Exception {
-		for (Coordinate coordinate:coordinates) {
-			switch (coordinate) {
-			case L:
-				rotateLeft();
-				break;
+    private void rotateLeft() {
+        this.direction = Direction.getDirectionByDegree(direction.getDegree() - 90);
+    }
 
-			case R:	
-				rotateRight();
-				break;
-			case M:
-				moveForward(plateau);
-				break;
-			}
-		}
-	}
-	
-	private void rotateLeft() {
-		this.direction = Direction.getDirectionByDegree(this.getDirection().getDegree() - 90);
-	}
-	
-	private void rotateRight() {
-		this.direction = Direction.getDirectionByDegree(this.getDirection().getDegree() + 90);
-	}
-	
-	private void moveForward(Plateau plateau) throws Exception {
-		switch (this.getDirection()) {
-		case N:
-			this.y++;
-			if (this.getY() > plateau.getY())
-				throw new Exception("Invalid move");
-			break;
-		case S:
-			this.y--;
-			if (this.getY() < 0)
-				throw new Exception("Invalid move");
-			break;
-		case E:
-			this.x++;
-			if (this.getX() > plateau.getX())
-				throw new Exception("Invalid move");
-			break;
-		case W:
-			this.x--;
-			if (this.getX() < 0)
-				throw new Exception("Invalid move");
-			break;
-		}
-	}
+    private void rotateRight() {
+        this.direction = Direction.getDirectionByDegree(direction.getDegree() + 90);
+    }
+
+    private void moveForward(Plateau plateau) {
+        switch (direction) {
+            case NORTH -> {
+                y++;
+                if (y > plateau.y()) throw new InvalidMoveException();
+            }
+            case SOUTH -> {
+                y--;
+                if (y < 0)  throw new InvalidMoveException();
+            }
+            case EAST -> {
+                x++;
+                if (x > plateau.x())  throw new InvalidMoveException();
+            }
+            case WEST -> {
+                x--;
+                if (this.getX() < 0)  throw new InvalidMoveException();
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + direction);
+        }
+    }
 }

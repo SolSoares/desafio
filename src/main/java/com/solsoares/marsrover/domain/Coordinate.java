@@ -1,20 +1,20 @@
 package com.solsoares.marsrover.domain;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 public enum Coordinate {
-	L("L"), R("R"), M("M");
-	
-	private String coordinate;
-	
-	private Coordinate(String coordinate) {
-		this.coordinate = coordinate;		
-	}
-	
-	public static Coordinate getCoordinateByText(String coordinate) {
-		for (Coordinate coord : values()) {			
-			if (coord.coordinate.equals(coordinate)) {
-				return coord;
-			}
-		}
-		return null;
-	}
+    LEFT("L"),
+    RIGHT("R"),
+    MOVE("M");
+
+    private String coordinate;
+
+    Coordinate(String coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public static Optional<Coordinate> getCoordinateByString(String coordinate) {
+        return Stream.of(values()).filter(c -> c.coordinate.equals(coordinate)).findFirst();
+    }
 }
