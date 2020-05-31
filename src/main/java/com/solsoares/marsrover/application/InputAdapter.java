@@ -13,16 +13,10 @@ public class InputAdapter {
 
     private static Plateau plateau;
     private static LinkedList<Rover> rovers = new LinkedList();
+    private final static String INPUT = "src/main/resources/input/cooordinates.txt";
 
-    /**
-     *  This method loads the input coordinates
-     *  @author It is a given source code
-     */
     public static Input loadInput() {
-
-        String file ="src/main/resources/input/cooordinates.txt";
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(INPUT))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 parseLine(line);
@@ -33,12 +27,7 @@ public class InputAdapter {
         return new Input(plateau, rovers);
     }
 
-    /**
-     * This method parses each line of the input coordinates
-     * @author Solange Soares
-     * @param line
-     */
-    public static void parseLine(String line) {
+    private static void parseLine(String line) {
         String[] chars = line.split(" ");
 
         switch (chars.length) {
@@ -48,12 +37,7 @@ public class InputAdapter {
         }
     }
 
-    /**
-     * This method parses each coordinate
-     * @author Solange Soares
-     * @param coordinates
-     */
-    public static void parseCoordinates(String coordinates) {
+    private static void parseCoordinates(String coordinates) {
         char[] coordinateArray = coordinates.toCharArray();
 
         for (char coordinate:coordinateArray)
